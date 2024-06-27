@@ -14,9 +14,9 @@ using the products table and the categories table, return the product name and t
 SELECT Employees.FirstName, SUM(Sales.Quantity) AS TQS
 FROM Employees
 INNER JOIN Sales ON Employees.EmployeeID = Sales.EmployeeID
-GROUP BY Employees.FirstName
+GROUP BY Employees.EmployeeID
 ORDER BY TQS DESC
-LIMIT 1;
+LIMIT 2;
 
 /* joins: find the name of the department, and the name of the category for Appliances and Games */
 SELECT Departments.Name AS DeptName, Categories.Name AS CatName
@@ -45,3 +45,20 @@ This query should return:
 -  the employee's first and last name
 -  the name of each product
 -  and how many of that product they sold */
+SELECT
+employees.EmployeeID,
+employees.FirstName,
+employees.LastName,
+products.Name AS ProductName,
+SUM(sales.Quantity) AS TQS
+FROM employees
+INNER JOIN sales ON employees.EmployeeID = sales.EmployeeID
+INNER JOIN products ON sales.ProductID = products.ProductID
+GROUP BY 
+employees.EmployeeID,
+employees.FirstName,
+employees.LastName,
+products.Name
+ORDER BY
+employees.EmployeeID,
+products.Name;
